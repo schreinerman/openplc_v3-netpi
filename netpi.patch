@@ -1,0 +1,31 @@
+diff --git a/webserver/scripts/change_hardware_layer.sh b/webserver/scripts/change_hardware_layer.sh
+index 45259ee..4e37f68 100755
+--- a/webserver/scripts/change_hardware_layer.sh
++++ b/webserver/scripts/change_hardware_layer.sh
+@@ -30,6 +30,13 @@ elif [ "$1" == "fischertechnik" ]; then
+     echo "Setting Platform"
+     echo rpi > ../scripts/openplc_platform
+     echo fischertechnik > ../scripts/openplc_driver
++
++elif [ "$1" == "netpi" ]; then
++    echo "Activating Hilscher NetPI driver"
++    cp ./hardware_layers/netpi.cpp ./hardware_layer.cpp
++    echo "Setting Platform"
++    echo rpi > ../scripts/openplc_platform
++    echo rpi > ../scripts/openplc_driver
+     
+ elif [ "$1" == "neuron" ]; then
+     echo "Activating Neuron driver"
+diff --git a/webserver/webserver.py b/webserver/webserver.py
+index 5daaca0..e171fd3 100644
+--- a/webserver/webserver.py
++++ b/webserver/webserver.py
+@@ -1688,6 +1688,8 @@ def hardware():
+             else: return_str += "<option value='blank_linux'>Blank with DNP3 (Linux only)</option>"
+             if (current_driver == "fischertechnik"): return_str += "<option selected='selected' value='fischertechnik'>Fischertechnik</option>"
+             else: return_str += "<option value='fischertechnik'>Fischertechnik</option>"
++            if (current_driver == "netpi"): return_str += "<option selected='selected' value='netpi'>Hilscher NetPI</option>"
++            else: return_str += "<option value='netpi'>Hilscher NetPI</option>"
+             if (current_driver == "neuron"): return_str += "<option selected='selected' value='neuron'>Neuron</option>"
+             else: return_str += "<option value='neuron'>Neuron</option>"
+             if (current_driver == "pixtend"): return_str += "<option selected='selected' value='pixtend'>PiXtend</option>"
