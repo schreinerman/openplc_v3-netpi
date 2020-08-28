@@ -12,7 +12,7 @@ index 45259ee..4e37f68 100755
 +    cp ./hardware_layers/netpi.cpp ./hardware_layer.cpp
 +    echo "Setting Platform"
 +    echo rpi > ../scripts/openplc_platform
-+    echo rpi > ../scripts/openplc_driver
++    echo netpi > ../scripts/openplc_driver
      
  elif [ "$1" == "neuron" ]; then
      echo "Activating Neuron driver"
